@@ -7,6 +7,9 @@ selskap.yaml
 # Wenche-input med fødselsnummer
 */config.yaml
 
+# Aksjonærregisteroppgaven som Wenche skriver ut (f.eks. med --dry-run) inneholder fødselsnummer
+aksjonaerregister_*.xml
+
 # Nøkler og hemmeligheter
 *.pem
 .env

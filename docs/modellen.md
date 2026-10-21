@@ -24,6 +24,8 @@ Utbytte er den ene posten som ikke kommer fra bankeksporten, fordi den er en bes
 
 Det gjør protokollen til et ekte bilag: den vedtar noe som ennå ikke er utbetalt, og alt er datert når det faktisk skjer. Den gamle modellen, der utbyttet ble bokført når pengene forlot konto, tvang protokollen til å «vedta» en utdeling som hadde skjedd et år tidligere.
 
+Datoen for generalforsamlingen i protokollen brukes igjen året etter. Når det avsatte utbyttet utbetales, rapporteres vedtaksdatoen i aksjonærregisteroppgaven, og `wenche-config` henter den fra fjorårets `protokoll.md`. Skriv derfor den faktiske møtedatoen i protokollen.
+
 Går det likevel penger til eier uten en avsetning å dekke dem med, gjetter ikke Bodil. Den spør om det er en nedbetaling av lån fra aksjonær, et utbytte vedtatt i løpet av året på grunnlag av fjorårets godkjente regnskap (da kreves et bilag datert senest på betalingsdagen, og Bodil lager det ikke i ettertid), et lån til aksjonær, eller en tilbakebetaling av innbetalt kapital.
 
 ## Lån fra aksjonær
