@@ -50,6 +50,10 @@ resultatregnskap:
     andre_finansinntekter: 0
     rentekostnader: 0
     andre_finanskostnader: 0
+    gevinst_ved_realisasjon_av_aksjer: <fra regnskap.md>   # salg av eierpost. Skattefri under
+    tap_ved_realisasjon_av_aksjer: <fra regnskap.md>       # fritaksmetoden (tapet gir ikke fradrag),
+                                       # så de skal IKKE i andre_finansinntekter/-kostnader, der
+                                       # Wenche skattlegger dem fullt. 0 uten salg i året
   skattekostnad: <fra regnskap.md>     # egen linje før årsresultatet (rskl. § 6-1), 0 uten
                                        # skattepliktig inntekt
 
@@ -116,6 +120,7 @@ Skriv ut en kort sjekkliste over det du IKKE kunne utlede fra bankeksporten og s
 - [ ] `avsatt_utbytte` stemmer med «Utbytte»-seksjonen i `regnskap.md` og med det protokollen faktisk vedtok.
 - [ ] `avsatt_utbytte` og `utbytte_utbetalt` er ikke forvekslet: den første er årets avsetning per 31.12, den andre er kontanter ut i året. Er fjorårets avsetning betalt i år og et nytt utbytte avsatt, er begge ulik null.
 - [ ] `tinginnskudd_ved_stiftelse` stemmer med stiftelsesdokumentene (kun år 1, og bare hvis selskapet ble stiftet ved tinginnskudd). Kan ikke utledes fra bankeksporten: et tinginnskudd går aldri gjennom bankkontoen.
+- [ ] Ved salg av eierpost: `gevinst_ved_realisasjon_av_aksjer` eller `tap_ved_realisasjon_av_aksjer` stemmer med «Salg av eierpost» i `regnskap.md`, og ingen del av beløpet står i `andre_finansinntekter`/`andre_finanskostnader`. `andre_aksjer` stemmer med `eierposter` i oppdatert `selskap.yaml`.
 - [ ] `eierandel_for_fritaksmetoden` riktig (avgjør om utbytte er fullt skattefritt eller 3 %-beskattet).
 - [ ] Noter fylles i Wenches **Dokumenter-fane**: antall ansatte (normalt 0) og eventuelt lån fra aksjonær som lån til/fra nærstående. Wenche genererer selve notene, Bodil gjør det ikke.
 - [ ] Balansen går opp (bekreftes også av valideringen under).
