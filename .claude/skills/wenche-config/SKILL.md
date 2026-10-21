@@ -65,8 +65,10 @@ resultatregnskap:
 balanse:
   eiendeler:
     anleggsmidler:
-      aksjer_i_datterselskap: 0       # eierandel ≥ 90 % hører hjemme her; ellers andre_aksjer
-      andre_aksjer: <sum kostpris eierposter>
+      aksjer_i_datterselskap: <fra regnskap.md>   # eierposter selskapet har kontroll over (flertall
+                                       # av stemmene, rskl. § 1-3). Over 0 gjør at Wenche oppgir
+                                       # selskapet som morselskap i årsregnskapet
+      andre_aksjer: <fra regnskap.md>  # øvrige eierposter
       langsiktige_fordringer: 0
     omloepmidler:
       kortsiktige_fordringer: 0
@@ -88,7 +90,8 @@ balanse:
                                        # i utbetalingsåret. 0 hvis ingenting er avsatt
       annen_kortsiktig_gjeld: 0
 
-foregaaende_aar:                       # fjorårets tall fra regnskap.md (sammenligningstall, rskl. § 6-6)
+foregaaende_aar:                       # fjorårets tall fra sammenligningskolonnen i regnskap.md, med eventuell
+                                       # omklassifisering av eierposter (sammenligningstall, rskl. § 6-6)
   resultatregnskap: { ... }            # samme struktur som over
   balanse: { ... }                     # utelat hele seksjonen hvis selskapet ble stiftet i år
 
@@ -148,6 +151,7 @@ Skriv ut en kort sjekkliste over det du IKKE kunne utlede fra bankeksporten og s
 - [ ] `tinginnskudd_ved_stiftelse` stemmer med stiftelsesdokumentene (kun år 1, og bare hvis selskapet ble stiftet ved tinginnskudd). Kan ikke utledes fra bankeksporten: et tinginnskudd går aldri gjennom bankkontoen.
 - [ ] Ved salg av eierpost: `gevinst_ved_realisasjon_av_aksjer` eller `tap_ved_realisasjon_av_aksjer` stemmer med «Salg av eierpost» i `regnskap.md`, og ingen del av beløpet står i `andre_finansinntekter`/`andre_finanskostnader`. `andre_aksjer` stemmer med `eierposter` i oppdatert `selskap.yaml`.
 - [ ] `eierandel_for_fritaksmetoden` riktig (avgjør om utbytte er fullt skattefritt eller 3 %-beskattet).
+- [ ] Eierpostene står på riktig linje: datterselskap (kontroll, normalt over 50 % av stemmene) under `aksjer_i_datterselskap`, resten under `andre_aksjer`. 90 %-grensen gjelder bare fritaksmetoden, ikke denne linjen.
 - [ ] Noter fylles i Wenches **Dokumenter-fane**: antall ansatte (normalt 0) og eventuelt lån fra aksjonær som lån til/fra nærstående. Wenche genererer selve notene, Bodil gjør det ikke.
 - [ ] Balansen går opp (bekreftes også av valideringen under).
 - [ ] Skatteberegningen sett over av regnskapsfører år 1.

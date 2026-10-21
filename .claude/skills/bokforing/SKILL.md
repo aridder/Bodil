@@ -11,7 +11,7 @@ Fører ett regnskapsår for et passivt holdingselskap fra en bankeksport. Du pro
 
 - `selskap.yaml` (stamdata, åpningsbalanse, eierposter). Finnes bare `selskap.example.yaml`, be brukeren kopiere den til `selskap.yaml` først.
 - `<år>/bankeksport.csv` med kolonnene `dato,beskrivelse,belop` (positivt = inn, negativt = ut). En ekstra kolonne `folio_id` (fra `folio_import.py --med-id`) er kjent: la den stå i fila og ignorer den. Ser eksporten ellers annerledes ut, spør hvilke kolonner som er dato/beskrivelse/beløp i stedet for å gjette.
-- Forrige års `<år-1>/regnskap.md` hvis det finnes. Da brukes fjorårets utgående balanse som åpningsbalanse (overstyrer `aapningsbalanse` i `selskap.yaml`), og fjorårets tall fylles inn som sammenligningstall.
+- Forrige års `<år-1>/regnskap.md` hvis det finnes. Da brukes fjorårets utgående balanse som åpningsbalanse (overstyrer `aapningsbalanse` i `selskap.yaml`), og fjorårets tall fylles inn som sammenligningstall. Står en eierpost på en annen balanselinje i fjorårets fil enn den skal stå på i år, se «Overgang» under «Datterselskap eller andre aksjer».
 
 ## Den låste modellen (gjelder hver transaksjon)
 
@@ -23,7 +23,7 @@ Fører ett regnskapsår for et passivt holdingselskap fra en bankeksport. Du pro
 | Penger ut til eier, bekreftet som nedbetaling, opp til utestående lån fra aksjonær | Reduserer lån fra aksjonær (gjeld). Rører verken resultat eller egenkapital |
 | Penger ut til eier utover utestående avsatt utbytte | **Flagg og spør.** Se «Utbetaling uten avsetning» under |
 | Alle andre utbetalinger | Andre driftskostnader |
-| Kjøp av eierpost | Andre aksjer (finansielt anleggsmiddel) til kostpris |
+| Kjøp av eierpost | Aksjer i datterselskap eller andre aksjer (finansielt anleggsmiddel) til kostpris. Se «Datterselskap eller andre aksjer» under |
 | Salg av eierpost | Kostprisen ut av balansen, differansen mot salgssummen er gevinst eller tap ved realisasjon av aksjer. Se «Salg av eierpost» under |
 | Betaling av skatt til Skatteetaten | Reduserer betalbar skatt (gjeld), er ikke en kostnad |
 
@@ -50,6 +50,18 @@ Går det penger til eier uten at det står en avsetning fra i fjor å dekke dem 
 
 Dette er den vanligste situasjonen det året et selskap går over fra utbetalingsmodellen (Bodil ≤ 0.6.0) til avsetningsmodellen, siden det ikke finnes noen inngående avsetning å dekke utbetalingen med.
 
+### Datterselskap eller andre aksjer
+
+Hver eierpost i `selskap.yaml` står på én av to balanselinjer, og skillet er **kontroll**, ikke skattens 90 %-grense. Et selskap er datterselskap når holdingselskapet har bestemmende innflytelse over det, og det har det alltid med flertallet av stemmene eller rett til å velge eller avsette flertallet av styret (regnskapsloven § 1-3, aksjeloven § 1-3 andre ledd).
+
+- Har eierposten `datterselskap: true` eller `false`, bruk det. Feltet er valgfritt og overstyrer eierandelen, for tilfeller der stemmeandelen avviker fra eierandelen eller kontrollen følger av avtale.
+- Ellers: `eierandel_prosent` over 50 gir `aksjer_i_datterselskap`, under 50 gir `andre_aksjer`.
+- **Flagg og spør** når kontroll ikke kan avgjøres: eierandel på nøyaktig 50 %, manglende `eierandel_prosent`, eller flere aksjeklasser med ulik stemmerett. Spør om selskapet har flertallet av stemmene eller rett til å velge flertallet av styret, og be brukeren sette `datterselskap` på eierposten.
+
+Linjen styrer mer enn plasseringen: Wenche oppgir selskapet som morselskap i årsregnskapet når `aksjer_i_datterselskap` er over 0. Et heleid datterselskap under `andre_aksjer` rapporterer derfor holdingselskapet som «ikke morselskap».
+
+**Overgang fra Bodil 1.0.0 og eldre:** da sto alle eierposter under `andre_aksjer`. Er en eierpost datterselskap etter reglene over, og står den under «Andre aksjer» i fjorårets `regnskap.md`, skal du omklassifisere fjorårets beløp til «Aksjer i datterselskap» i sammenligningskolonnen. Da er linjene sammenlignbare (rskl. § 6-6). Summen eiendeler endres ikke. Skriv omklassifiseringen under Merknader, og ikke endre fjorårets `regnskap.md`.
+
 ### Salg av eierpost
 
 Eierposten står til kostpris. Ved salg fjernes kostprisen fra balansen (`andre_aksjer`, eller `aksjer_i_datterselskap` hvis posten står der), og salgssummen kommer inn på bankkontoen. Differansen er et regnskapsmessig resultat:
@@ -73,7 +85,7 @@ Uten denne linjen går ikke balansen opp når salgssummen avviker fra kostprisen
    - endring i `laan_fra_aksjonaer` = sum innskudd fra eier − sum nedbetalt lån til eier
 3. **Skattekostnad.** Et år uten utbytte gir 0, men et år med mottatt utbytte har normalt en liten reell skattekostnad, og regnskapsloven § 6-1 krever den som egen linje før årsresultatet. Regn i denne rekkefølgen:
    - **Fremførbart underskudd 01.01** = «Underskudd til fremføring neste år» under «Skattemessig» i `<år-1>/regnskap.md`. Finnes ikke fjorårets fil (år 1, eller år ført utenfor Bodil), **spør brukeren** om fremførbart underskudd fra fjorårets skattemelding i stedet for å anta 0. Fastsett tallet hvert år, også når årets inntekt er negativ: det er dette tallet `wenche-config` skal sende til Wenche.
-   - `skattepliktig_utbytte` = 0 hvis eierandelen er mer enn 90 %, ellers 3 % av mottatt utbytte rundet opp til nærmeste krone (fritaksmetoden, sktl. § 2-38 sjette ledd). Unntaket fra sjablonen gjelder konsern etter sktl. § 10-4, som krever *mer enn* 90 % av aksjene og stemmene, så nøyaktig 90 % gir 3 %. Eierandelen står under `eierposter` i `selskap.yaml`. Har selskapet flere eierposter med ulik eierandel, flagg det og spør hvilken posten utbyttet kom fra i stedet for å velge selv.
+   - `skattepliktig_utbytte` = 0 hvis eierandelen er mer enn 90 %, ellers 3 % av mottatt utbytte rundet opp til nærmeste krone (fritaksmetoden, sktl. § 2-38 sjette ledd). Unntaket fra sjablonen gjelder konsern etter sktl. § 10-4, som krever *mer enn* 90 % av aksjene og stemmene, så nøyaktig 90 % gir 3 %. Eierandelen står under `eierposter` i `selskap.yaml`. Har selskapet flere eierposter med ulik eierandel, flagg det og spør hvilken posten utbyttet kom fra i stedet for å velge selv. Dette er en skattegrense og har ingenting med om eierposten er datterselskap å gjøre: en eierandel på 60 % er datterselskap i balansen, men utbyttet derfra er likevel 3 %-beskattet.
    - `skattepliktig_inntekt` = `skattepliktig_utbytte − andre_driftskostnader`. Gevinst og tap ved realisasjon av aksjer holdes utenfor: under fritaksmetoden er gevinsten skattefri og tapet ikke fradragsberettiget (sktl. § 2-38), og 3 %-sjablonen gjelder bare utbytte, ikke gevinst. Dette gjelder aksjer i norske aksjeselskaper. Er det solgte selskapet utenlandsk, **flagg og spør**: fritaksmetoden har egne vilkår for selskaper utenfor EØS og i lavskatteland (sktl. § 2-38), og Bodil avgjør ikke det.
    - Er `skattepliktig_inntekt` positiv, trekk fra fremførbart underskudd 01.01, høyst like mye som inntekten. Det som trekkes fra er «anvendt fremført underskudd».
    - `skattekostnad` = 22 % av det som står igjen, rundet opp. Er `skattepliktig_inntekt` 0 eller negativ etter fradrag, er skattekostnaden 0.
@@ -85,7 +97,8 @@ Uten denne linjen går ikke balansen opp når salgssummen avviker fra kostprisen
    - Generalforsamlingen vedtar avsetningen når den godkjenner årsregnskapet, altså i `protokoll`-skillen. Bodil foregriper ikke vedtaket, den fører styrets forslag.
 6. **Balanse per 31.12:**
    - `bankinnskudd` = åpningssaldo + sum alle transaksjoner (skal stemme med faktisk saldo 31.12, sjekk mot bankutskrift)
-   - `andre_aksjer` = sum kostpris for eierposter i `selskap.yaml` per 31.12, etter eventuelle kjøp og salg i året (se «Salg av eierpost»)
+   - `aksjer_i_datterselskap` = sum kostpris for eierposter som er datterselskap (se «Datterselskap eller andre aksjer») per 31.12, etter eventuelle kjøp og salg i året (se «Salg av eierpost»)
+   - `andre_aksjer` = sum kostpris for øvrige eierposter per 31.12
    - `aksjekapital` = fra `selskap.yaml`
    - `annen_egenkapital` = inngående annen egenkapital + årsresultat − `avsatt_utbytte_i_aar` − eventuelt utbytte vedtatt og utbetalt i året (steget «Utbetaling uten avsetning»). Merk at et utbytte utbetalt i år som gjør opp fjorårets avsetning **ikke** står her: det traff egenkapitalen i fjor.
    - `avsatt_utbytte` = inngående avsatt utbytte − utbetalt i år mot den avsetningen + `avsatt_utbytte_i_aar`
@@ -122,7 +135,7 @@ Skriv en lesbar markdown-fil med disse seksjonene (ikke skriv fødselsnummer i d
 ### Eiendeler
 | Post | <år> | <år-1> |
 |---|--:|--:|
-| Aksjer i datterselskap | 0 | ... |
+| Aksjer i datterselskap | <x> | ... |
 | Andre aksjer | <x> | ... |
 | Langsiktige fordringer | 0 | ... |
 | Kortsiktige fordringer | 0 | ... |
