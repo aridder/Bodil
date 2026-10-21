@@ -1,0 +1,122 @@
+# Fixture for salg av eierpost med gevinst.
+#
+# Selskapet eier en post til kostpris 50 000 og selger halvparten for 26 500. Kostprisen
+# for den solgte delen (25 000) tas ut av balansen, og differansen på 1 500 føres som
+# gevinst ved realisasjon av aksjer. Driftskostnadene er 125.
+#
+# Gevinsten står i resultatet (årsresultat 1 500 − 125 = 1 375), men er skattefri etter
+# fritaksmetoden (sktl. § 2-38). Den skal derfor stå i gevinst_ved_realisasjon_av_aksjer
+# og ikke i andre_finansinntekter, der Wenche skattlegger den fullt. Skattepliktig inntekt
+# blir −125 og skattekostnaden 0.
+#
+# KUN syntetiske data. Aldri ekte fødselsnummer her (fila versjoneres).
+
+selskap:
+  navn: "Eksempel Holding AS"
+  org_nummer: "123456789"
+  daglig_leder: "Kari Nordmann"
+  styreleder: "Kari Nordmann"
+  forretningsadresse: "Eksempelgata 1, 0001 Oslo"
+  stiftelsesaar: 2022
+  stiftelsesdato: "2022-03-14"
+  aksjekapital: 30000
+  kontakt_epost: "kari@example.no"
+
+regnskapsaar: 2025
+
+resultatregnskap:
+  driftsinntekter:
+    salgsinntekter: 0
+    andre_driftsinntekter: 0
+  driftskostnader:
+    loennskostnader: 0
+    avskrivninger: 0
+    andre_driftskostnader: 125
+  finansposter:
+    utbytte_fra_datterselskap: 0
+    andre_finansinntekter: 0
+    rentekostnader: 0
+    andre_finanskostnader: 0
+    gevinst_ved_realisasjon_av_aksjer: 1500
+    tap_ved_realisasjon_av_aksjer: 0
+  skattekostnad: 0
+
+balanse:
+  eiendeler:
+    anleggsmidler:
+      aksjer_i_datterselskap: 0
+      andre_aksjer: 25000
+      langsiktige_fordringer: 0
+    omloepmidler:
+      kortsiktige_fordringer: 0
+      bankinnskudd: 56375
+  egenkapital_og_gjeld:
+    egenkapital:
+      aksjekapital: 30000
+      overkursfond: 0
+      annen_egenkapital: 1375
+    langsiktig_gjeld:
+      laan_fra_aksjonaer: 50000
+      andre_langsiktige_laan: 0
+    kortsiktig_gjeld:
+      leverandoergjeld: 0
+      betalbar_skatt: 0
+      skyldige_offentlige_avgifter: 0
+      avsatt_utbytte: 0
+      annen_kortsiktig_gjeld: 0
+
+foregaaende_aar:
+  resultatregnskap:
+    driftsinntekter:
+      salgsinntekter: 0
+      andre_driftsinntekter: 0
+    driftskostnader:
+      loennskostnader: 0
+      avskrivninger: 0
+      andre_driftskostnader: 0
+    finansposter:
+      utbytte_fra_datterselskap: 0
+      andre_finansinntekter: 0
+      rentekostnader: 0
+      andre_finanskostnader: 0
+      gevinst_ved_realisasjon_av_aksjer: 0
+      tap_ved_realisasjon_av_aksjer: 0
+    skattekostnad: 0
+  balanse:
+    eiendeler:
+      anleggsmidler:
+        aksjer_i_datterselskap: 0
+        andre_aksjer: 50000
+        langsiktige_fordringer: 0
+      omloepmidler:
+        kortsiktige_fordringer: 0
+        bankinnskudd: 30000
+    egenkapital_og_gjeld:
+      egenkapital:
+        aksjekapital: 30000
+        overkursfond: 0
+        annen_egenkapital: 0
+      langsiktig_gjeld:
+        laan_fra_aksjonaer: 50000
+        andre_langsiktige_laan: 0
+      kortsiktig_gjeld:
+        leverandoergjeld: 0
+        betalbar_skatt: 0
+        skyldige_offentlige_avgifter: 0
+        avsatt_utbytte: 0
+        annen_kortsiktig_gjeld: 0
+
+skattemelding:
+  underskudd_til_fremfoering: 0
+  anvend_fritaksmetoden: true
+  eierandel_for_fritaksmetoden: 12.5
+  boersnotert: false
+  formuesverdi_aksjer: 0
+
+aksjonaerer:
+  - navn: "Kari Nordmann"
+    fodselsnummer: "24847799354"
+    antall_aksjer: 1000
+    aksjeklasse: "ordinære"
+    utbytte_utbetalt: 0
+    innbetalt_kapital_per_aksje: 30

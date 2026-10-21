@@ -37,7 +37,8 @@ aapningsbalanse:
   bankinnskudd: 30000                # Saldo 01.01
   annen_egenkapital: 0               # Akkumulert resultat fra tidligere år (negativ = underskudd)
   laan_fra_aksjonaer: 50000          # Utestående lån fra eier ved årets start
-                                     # (her: brukt til å finansiere eierposten under)
+                                     # (her: brukt til å finansiere eierposten under).
+                                     # Nedbetaling i året reduserer det
   avsatt_utbytte: 0                  # Utbytte vedtatt i fjorårets regnskap, ennå ikke utbetalt
                                      # 01.01. Utbetalingen i år gjør opp denne gjelden og
                                      # reduserer ikke egenkapitalen på nytt
@@ -46,8 +47,16 @@ aapningsbalanse:
 
 # Eierposter i andre selskap, ført til kostpris (finansielle anleggsmidler).
 # Endres bare når du kjøper eller selger.
+#
+# eierandel_prosent avgjør to ting:
+#   - balanselinjen: over 50 % er datterselskap (kontroll, rskl. § 1-3), ellers
+#     andre aksjer. Nøyaktig 50 % flagges.
+#   - fritaksmetoden: over 90 % gir fullt skattefritt utbytte, 90 % eller lavere gir 3 %-sjablon.
 eierposter:
   - selskap: "Fjordheim Teknologi AS"
     org_nummer: "987654321"
     eierandel_prosent: 25
     kostpris: 50000
+    # datterselskap: true            # Valgfri. Overstyrer eierandelen når stemmeandelen
+                                     # avviker fra den, eller kontrollen følger av avtale
+                                     # (f.eks. rett til å velge flertallet av styret)

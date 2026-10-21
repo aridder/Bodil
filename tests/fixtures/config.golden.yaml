@@ -114,8 +114,11 @@ skattemelding:
 
 aksjonaerer:
   - navn: "Kari Nordmann"
-    fodselsnummer: "01010112345"
+    fodselsnummer: "24847799354"
     antall_aksjer: 1000
     aksjeklasse: "ordinære"
     utbytte_utbetalt: 10000
     innbetalt_kapital_per_aksje: 30
+
+# Utbyttet på 10 000 er vedtatt og utbetalt i året på grunnlag av fjorårets årsregnskap.
+utbytte_vedtaksdato: 2025-05-20
