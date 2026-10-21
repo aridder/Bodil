@@ -14,6 +14,8 @@ Bodil er testet mot. Den versjonen er også pinnet i CI
 
 ## [1.1.0]
 
+- **`folio_import.py --med-id`** legger til kolonnen `folio_id` med Folios transaksjons-id, så et annet system kan skille to like transaksjoner fra en duplikat ved gjentatt import. Uten flagget er CSV-en uendret. Mangler en transaksjon id, stopper skriptet.
+- **Nedbetaling av lån fra aksjonær er en egen rad i den låste modellen.** Lånet kunne bare øke, så en nedbetaling ble flagget med svaralternativer som ikke passet. Nå reduserer en bekreftet nedbetaling `laan_fra_aksjonaer` opp til utestående lån, og den er første svaralternativ i «Utbetaling uten avsetning». Har selskapet både avsatt utbytte og lån fra aksjonær, spør Bodil om utbetalingen er utbytte eller nedbetaling i stedet for å la avsetningen dekke den først, siden svaret avgjør hva eieren skattlegges for. Nedbetalinger holdes utenfor `utbytte_utbetalt`. Innbetaling fra eier flagges hvis beskrivelsen tyder på kapitalforhøyelse eller tilleggsinnbetaling (aksjeloven kapittel 10), ellers føres den som lån som før.
 - **Salg av eierpost gir nå et regnskap som går opp.** Kostprisen tas ut av balansen, og differansen mot salgssummen føres som gevinst eller tap ved realisasjon av aksjer. `bokforing` holder gevinst og tap utenfor skatteberegningen (fritaksmetoden: gevinst skattefri, tap ikke fradragsberettiget), flagger utenlandske selskaper og ber brukeren oppdatere `eierposter` i `selskap.yaml`. Delsalg tar ut forholdsmessig kostpris. Wenche har ennå ikke egne felt for dette, så `wenche-config` stopper og forklarer at beløpet i `andre_finansinntekter`/`andre_finanskostnader` ville gitt feil skatt, i stedet for å skrive det inn stille.
 
 **Testet mot Wenche ≥ 1.5.1.**
