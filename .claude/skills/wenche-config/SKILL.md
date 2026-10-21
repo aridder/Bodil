@@ -93,9 +93,12 @@ foregaaende_aar:                       # fjorårets tall fra regnskap.md (sammen
   balanse: { ... }                     # utelat hele seksjonen hvis selskapet ble stiftet i år
 
 skattemelding:
-  underskudd_til_fremfoering: <fra «Skattemessig» i regnskap.md, ellers fjorårets RF-1028>
+  underskudd_til_fremfoering: <«Fremførbart underskudd 01.01» fra «Skattemessig» i regnskap.md>
+                                       # saldoen ved årets START. Wenche legger selv til årets
+                                       # underskudd, så «Underskudd til fremføring neste år»
+                                       # (saldoen 31.12) her ville telt det to ganger. Se under
   anvend_fritaksmetoden: true          # holdingselskap som eier aksjer
-  eierandel_for_fritaksmetoden: <prosent>   # ≥ 90 % gir fullt skattefritt utbytte; < 90 % gir 3 % sjablonbeskatning
+  eierandel_for_fritaksmetoden: <prosent>   # over 90 % gir fullt skattefritt utbytte; 90 % eller lavere gir 3 % sjablonbeskatning
   boersnotert: false
   formuesverdi_aksjer: <RF-1088S post 209, MÅ fylles inn manuelt>
 
@@ -108,16 +111,39 @@ aksjonaerer:
                        # utbytte vedtatt og utbetalt i året. Dette er kontantstrømmen i året, ikke
                        # årets avsetning, og kan derfor avvike fra avsatt_utbytte over>
     innbetalt_kapital_per_aksje: <aksjekapital / antall aksjer>
+
+utbytte_vedtaksdato: <ÅÅÅÅ-MM-DD>     # påkrevd når en aksjonær har utbytte_utbetalt > 0, ellers
+                                     # utelat. Datoen generalforsamlingen vedtok utbyttet som ble
+                                     # UTBETALT i år. Må ligge i regnskapsåret. Se under
 ```
+
+### Fremførbart underskudd
+
+`underskudd_til_fremfoering` er saldoen ved årets **start**. Hent den fra linjen «Fremførbart underskudd 01.01» under «Skattemessig» i `regnskap.md`.
+
+Mangler linjen, er `regnskap.md` typisk ført med Bodil før 1.1.0. Bruk da **aldri** «Underskudd til fremføring neste år» fra samme fil, siden det er saldoen 31.12. Hent i stedet «Underskudd til fremføring neste år» fra `<år-1>/regnskap.md`. Finnes ikke den fila eller linjen, spør brukeren om fremførbart underskudd fra fjorårets skattemelding.
+
+Kontroller tallet mot årets «Skattemessig»: fremførbart underskudd 01.01 pluss årets underskudd (eller minus anvendt fremført underskudd i et år med overskudd) skal gi «Underskudd til fremføring neste år». Stemmer det ikke, stopp og si fra.
+
+### Vedtaksdato for utbytte
+
+Wenche krever `utbytte_vedtaksdato` når det er utbetalt utbytte, og rapporterer den i aksjonærregisteroppgaven (RF-1086). Datoen gjelder utbyttet som ble **utbetalt** i år, ikke årets avsetning. Hent den slik, ut fra «Utbytte» i `regnskap.md`:
+
+- **Utbetalt mot fjorårets avsetning:** vedtaket ble gjort på generalforsamlingen som godkjente fjorårets årsregnskap. Bruk «Dato for generalforsamling» i `<år-1>/protokoll.md`.
+- **Utbytte vedtatt og utbetalt i året** (uten forutgående avsetning): Bodil har ikke laget det bilaget. **Spør brukeren** om datoen i vedtaket, og ikke gjett.
+- **Begge deler i samme år, med ulik dato:** Wenche har bare ett datofelt. **Stopp og flagg**, og be brukeren avklare med regnskapsfører i stedet for å velge én av datoene.
+- **Datoen er ikke en faktisk dato** (en plassholder som «settes av brukeren», eller den mangler): stopp og be brukeren fylle inn datoen generalforsamlingen faktisk ble holdt.
+- **Datoen ligger utenfor regnskapsåret:** stopp. Wenche avviser den, og den tyder på at feil protokoll er brukt.
 
 ## Output 2: sjekkliste
 
 Skriv ut en kort sjekkliste over det du IKKE kunne utlede fra bankeksporten og som brukeren må verifisere manuelt:
 
 - [ ] `formuesverdi_aksjer` hentet fra aksjeoppgaven RF-1088S (post 209). Kan ikke utledes fra bankeksporten.
-- [ ] `underskudd_til_fremfoering` stemmer med «Skattemessig» i `regnskap.md` (år 1: hentet fra fjorårets RF-1028).
+- [ ] `underskudd_til_fremfoering` er «Fremførbart underskudd 01.01» fra «Skattemessig» i `regnskap.md` (år 1: fra fjorårets skattemelding; mangler linjen, se «Fremførbart underskudd»). Underskuddet til fremføring som Wenche beregner, skal være lik «Underskudd til fremføring neste år» i `regnskap.md`.
 - [ ] `skattekostnad` og `betalbar_skatt` stemmer med hverandre og med Wenches egen beregning. Sier Wenche at skatten er beregnet men ikke ført, mangler linjen i `regnskap.md`.
 - [ ] `avsatt_utbytte` stemmer med «Utbytte»-seksjonen i `regnskap.md` og med det protokollen faktisk vedtok.
+- [ ] Er det utbetalt utbytte, er `utbytte_vedtaksdato` datoen for vedtaket om det utbetalte utbyttet (normalt generalforsamlingen i `<år-1>/protokoll.md`), og den ligger i regnskapsåret.
 - [ ] `avsatt_utbytte` og `utbytte_utbetalt` er ikke forvekslet: den første er årets avsetning per 31.12, den andre er kontanter ut i året. Er fjorårets avsetning betalt i år og et nytt utbytte avsatt, er begge ulik null.
 - [ ] `tinginnskudd_ved_stiftelse` stemmer med stiftelsesdokumentene (kun år 1, og bare hvis selskapet ble stiftet ved tinginnskudd). Kan ikke utledes fra bankeksporten: et tinginnskudd går aldri gjennom bankkontoen.
 - [ ] Ved salg av eierpost: `gevinst_ved_realisasjon_av_aksjer` eller `tap_ved_realisasjon_av_aksjer` stemmer med «Salg av eierpost» i `regnskap.md`, og ingen del av beløpet står i `andre_finansinntekter`/`andre_finanskostnader`. `andre_aksjer` stemmer med `eierposter` i oppdatert `selskap.yaml`.

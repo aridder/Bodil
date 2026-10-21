@@ -52,6 +52,15 @@ jobs:
             wenche valider-aarsregnskap --config "$fixture"
             echo "::endgroup::"
           done
+      - name: Valider aksjonærregisteroppgaven mot Wenche
+        # --dry-run validerer og bygger RF-1086 lokalt uten innlogging og uten å sende.
+        # Fanger blant annet utbytte uten utbytte_vedtaksdato.
+        run: |
+          for fixture in tests/fixtures/config.*.yaml; do
+            echo "::group::$fixture"
+            wenche send-aksjonaerregister --dry-run --config "$fixture"
+            echo "::endgroup::"
+          done
       - name: Feltnavn-lint
         run: python tests/check_field_names.py
       - name: Folio-import-tester
@@ -79,6 +88,15 @@ jobs:
           for fixture in tests/fixtures/config.*.yaml; do
             echo "::group::$fixture"
             wenche valider-aarsregnskap --config "$fixture"
+            echo "::endgroup::"
+          done
+      - name: Valider aksjonærregisteroppgaven mot Wenche
+        # --dry-run validerer og bygger RF-1086 lokalt uten innlogging og uten å sende.
+        # Fanger blant annet utbytte uten utbytte_vedtaksdato.
+        run: |
+          for fixture in tests/fixtures/config.*.yaml; do
+            echo "::group::$fixture"
+            wenche send-aksjonaerregister --dry-run --config "$fixture"
             echo "::endgroup::"
           done
       - name: Feltnavn-lint

@@ -24,6 +24,8 @@ Utbytte er den ene posten som ikke kommer fra bankeksporten, fordi den er en bes
 
 Det gjør protokollen til et ekte bilag: den vedtar noe som ennå ikke er utbetalt, og alt er datert når det faktisk skjer. Den gamle modellen, der utbyttet ble bokført når pengene forlot konto, tvang protokollen til å «vedta» en utdeling som hadde skjedd et år tidligere.
 
+Datoen for generalforsamlingen i protokollen brukes igjen året etter. Når det avsatte utbyttet utbetales, rapporteres vedtaksdatoen i aksjonærregisteroppgaven, og `wenche-config` henter den fra fjorårets `protokoll.md`. Skriv derfor den faktiske møtedatoen i protokollen.
+
 Går det likevel penger til eier uten en avsetning å dekke dem med, gjetter ikke Bodil. Den spør om det er en nedbetaling av lån fra aksjonær, et utbytte vedtatt i løpet av året på grunnlag av fjorårets godkjente regnskap (da kreves et bilag datert senest på betalingsdagen, og Bodil lager det ikke i ettertid), et lån til aksjonær, eller en tilbakebetaling av innbetalt kapital.
 
 ## Lån fra aksjonær
@@ -34,9 +36,9 @@ Er en innbetaling fra eier egentlig en kapitalforhøyelse, krever den vedtak i g
 
 ## Skatt
 
-Et hvilende år har ingen skattepliktig inntekt, og skattekostnaden er 0. Mottar selskapet utbytte og eierandelen er under 90 %, er 3 % av utbyttet skattepliktig (sjablonregelen i fritaksmetoden, sktl. § 2-38 sjette ledd). Da har selskapet en reell, liten skattekostnad, og regnskapsloven § 6-1 krever den som egen linje før årsresultatet. Bodil regner den etter samme regel som Wenche: skattepliktig del av utbyttet minus driftskostnadene, minus eventuelt fremført underskudd, ganget med 22 %.
+Et hvilende år har ingen skattepliktig inntekt, og skattekostnaden er 0. Mottar selskapet utbytte og eierandelen er 90 % eller lavere, er 3 % av utbyttet skattepliktig (sjablonregelen i fritaksmetoden, sktl. § 2-38 sjette ledd). Da har selskapet en reell, liten skattekostnad, og regnskapsloven § 6-1 krever den som egen linje før årsresultatet. Bodil regner den etter samme regel som Wenche: skattepliktig del av utbyttet minus driftskostnadene, minus eventuelt fremført underskudd, ganget med 22 %.
 
-Skatten fastsettes og betales året etter, så den står som **betalbar skatt** i balansen per 31.12. Betalingen året etter reduserer den gjelden og er ikke en ny kostnad. Ved eierandel på 90 % eller mer er utbyttet fullt skattefritt, og skattekostnaden blir 0.
+Skatten fastsettes og betales året etter, så den står som **betalbar skatt** i balansen per 31.12. Betalingen året etter reduserer den gjelden og er ikke en ny kostnad. Ved eierandel over 90 % er utbyttet fullt skattefritt, og skattekostnaden blir 0. Grensen er *mer enn* 90 % (konsern etter sktl. § 10-4), så nøyaktig 90 % gir 3 %-sjablon.
 
 Selges en eierpost, er gevinsten skattefri og tapet ikke fradragsberettiget under fritaksmetoden, og 3 %-sjablonen gjelder ikke gevinst. Gevinst og tap står derfor i resultatet, men holdes utenfor skatteberegningen. Er det solgte selskapet utenlandsk, flagger Bodil det. `wenche-config` fører beløpene til Wenches egne felt for gevinst og tap ved realisasjon av aksjer, og Wenche holder dem utenfor skatteberegningen på samme måte. Brukeren må selv fjerne eller redusere eierposten i `selskap.yaml`.
 
