@@ -19,6 +19,7 @@ Lager den ordinære generalforsamlingsprotokollen for et regnskapsår. Den godkj
 - **Utbytte som allerede er utbetalt i regnskapsåret skal ikke vedtas her.** Viser «Utbytte»-seksjonen et beløp under «vedtatt og utbetalt i året», ble det besluttet i løpet av året på grunnlag av fjorårets godkjente årsregnskap. Denne protokollen skrives etter at pengene forlot konto og kan ikke vedta dem i ettertid. Omtal utdelingen som et faktum, ikke som en beslutning, og bruk formuleringen i punkt 3 under. **Tilbakedater aldri** et vedtak, og ikke skriv en protokoll som gir inntrykk av å være bilaget for det. Mangler bilaget, si det til brukeren.
 - **Ved underskudd:** protokollen fastslår at årets underskudd dekkes av (føres mot) annen egenkapital, og at det ikke avsettes utbytte.
 - **Revisjon:** små holdingselskaper er normalt fritatt for revisjonsplikt. Protokollen bekrefter at årsregnskapet er fastsatt uten revisjon. Er du i tvil om selskapet faktisk er fritatt, flagg det.
+- **Datoen for generalforsamlingen skal være den faktiske møtedatoen.** Spør brukeren om den hvis den ikke er kjent, og skriv den som ÅÅÅÅ-MM-DD. Den blir `utbytte_vedtaksdato` i aksjonærregisteroppgaven neste år, når det avsatte utbyttet utbetales.
 - Ikke skriv fullt fødselsnummer i protokollen (den versjoneres); bruk navn.
 
 ## Output: `<år>/protokoll.md`
@@ -28,7 +29,7 @@ Lager den ordinære generalforsamlingsprotokollen for et regnskapsår. Den godkj
 
 **Org.nr.:** <org_nummer>
 **Regnskapsår:** <år>
-**Dato for generalforsamling:** <dato, settes av brukeren / dagens dato>
+**Dato for generalforsamling:** <den faktiske møtedatoen, ÅÅÅÅ-MM-DD>
 **Sted:** <forretningsadresse>
 
 ## 1. Åpning og konstituering
