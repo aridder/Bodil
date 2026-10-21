@@ -93,7 +93,10 @@ foregaaende_aar:                       # fjorårets tall fra regnskap.md (sammen
   balanse: { ... }                     # utelat hele seksjonen hvis selskapet ble stiftet i år
 
 skattemelding:
-  underskudd_til_fremfoering: <fra «Skattemessig» i regnskap.md, ellers fjorårets RF-1028>
+  underskudd_til_fremfoering: <«Fremførbart underskudd 01.01» fra «Skattemessig» i regnskap.md>
+                                       # saldoen ved årets START. Wenche legger selv til årets
+                                       # underskudd, så «Underskudd til fremføring neste år»
+                                       # (saldoen 31.12) her ville telt det to ganger
   anvend_fritaksmetoden: true          # holdingselskap som eier aksjer
   eierandel_for_fritaksmetoden: <prosent>   # over 90 % gir fullt skattefritt utbytte; 90 % eller lavere gir 3 % sjablonbeskatning
   boersnotert: false
@@ -115,7 +118,7 @@ aksjonaerer:
 Skriv ut en kort sjekkliste over det du IKKE kunne utlede fra bankeksporten og som brukeren må verifisere manuelt:
 
 - [ ] `formuesverdi_aksjer` hentet fra aksjeoppgaven RF-1088S (post 209). Kan ikke utledes fra bankeksporten.
-- [ ] `underskudd_til_fremfoering` stemmer med «Skattemessig» i `regnskap.md` (år 1: hentet fra fjorårets RF-1028).
+- [ ] `underskudd_til_fremfoering` er «Fremførbart underskudd 01.01» fra «Skattemessig» i `regnskap.md` (år 1: fra fjorårets skattemelding). Underskuddet til fremføring som Wenche beregner, skal være lik «Underskudd til fremføring neste år» i `regnskap.md`.
 - [ ] `skattekostnad` og `betalbar_skatt` stemmer med hverandre og med Wenches egen beregning. Sier Wenche at skatten er beregnet men ikke ført, mangler linjen i `regnskap.md`.
 - [ ] `avsatt_utbytte` stemmer med «Utbytte»-seksjonen i `regnskap.md` og med det protokollen faktisk vedtok.
 - [ ] `avsatt_utbytte` og `utbytte_utbetalt` er ikke forvekslet: den første er årets avsetning per 31.12, den andre er kontanter ut i året. Er fjorårets avsetning betalt i år og et nytt utbytte avsatt, er begge ulik null.

@@ -72,11 +72,12 @@ Uten denne linjen går ikke balansen opp når salgssummen avviker fra kostprisen
    - `utbytte_utbetalt` = sum utbetalt til eier som utbytte, ikke nedbetaling av lån fra aksjonær. Dette tallet er **bare** en kontantstrøm og en post i aksjonærregisteroppgaven; det reduserer ikke egenkapitalen med mindre steget over konkluderte med utbytte vedtatt i året
    - endring i `laan_fra_aksjonaer` = sum innskudd fra eier − sum nedbetalt lån til eier
 3. **Skattekostnad.** Et år uten utbytte gir 0, men et år med mottatt utbytte har normalt en liten reell skattekostnad, og regnskapsloven § 6-1 krever den som egen linje før årsresultatet. Regn i denne rekkefølgen:
+   - **Fremførbart underskudd 01.01** = «Underskudd til fremføring neste år» under «Skattemessig» i `<år-1>/regnskap.md`. Finnes ikke fjorårets fil (år 1, eller år ført utenfor Bodil), **spør brukeren** om fremførbart underskudd fra fjorårets skattemelding i stedet for å anta 0. Fastsett tallet hvert år, også når årets inntekt er negativ: det er dette tallet `wenche-config` skal sende til Wenche.
    - `skattepliktig_utbytte` = 0 hvis eierandelen er mer enn 90 %, ellers 3 % av mottatt utbytte rundet opp til nærmeste krone (fritaksmetoden, sktl. § 2-38 sjette ledd). Unntaket fra sjablonen gjelder konsern etter sktl. § 10-4, som krever *mer enn* 90 % av aksjene og stemmene, så nøyaktig 90 % gir 3 %. Eierandelen står under `eierposter` i `selskap.yaml`. Har selskapet flere eierposter med ulik eierandel, flagg det og spør hvilken posten utbyttet kom fra i stedet for å velge selv.
    - `skattepliktig_inntekt` = `skattepliktig_utbytte − andre_driftskostnader`. Gevinst og tap ved realisasjon av aksjer holdes utenfor: under fritaksmetoden er gevinsten skattefri og tapet ikke fradragsberettiget (sktl. § 2-38), og 3 %-sjablonen gjelder bare utbytte, ikke gevinst. Dette gjelder aksjer i norske aksjeselskaper. Er det solgte selskapet utenlandsk, **flagg og spør**: fritaksmetoden har egne vilkår for selskaper utenfor EØS og i lavskatteland (sktl. § 2-38), og Bodil avgjør ikke det.
-   - Er `skattepliktig_inntekt` positiv, trekk fra fremført underskudd. Tallet står under «Skattemessig» i `<år-1>/regnskap.md`. Finnes ikke fjorårets fil (år 1, eller år ført utenfor Bodil), **spør brukeren** om underskudd til fremføring fra fjorårets RF-1028 i stedet for å anta 0.
+   - Er `skattepliktig_inntekt` positiv, trekk fra fremførbart underskudd 01.01, høyst like mye som inntekten. Det som trekkes fra er «anvendt fremført underskudd».
    - `skattekostnad` = 22 % av det som står igjen, rundet opp. Er `skattepliktig_inntekt` 0 eller negativ etter fradrag, er skattekostnaden 0.
-   - `underskudd_til_fremfoering` for neste år: er `skattepliktig_inntekt` negativ, øk fjorårets fremførte underskudd med hele det negative beløpet. Er den positiv, reduser fjorårets med det som faktisk ble brukt som fradrag.
+   - **Underskudd til fremføring neste år**: er `skattepliktig_inntekt` negativ, fremførbart underskudd 01.01 pluss hele det negative beløpet. Er den positiv, fremførbart underskudd 01.01 minus anvendt fremført underskudd. Dette er saldoen 31.12. Den blir neste års 01.01-tall og skal **ikke** til Wenche i år: Wenche legger selv til årets underskudd, så saldoen 31.12 i Wenches felt teller årets underskudd to ganger.
 4. **Årsresultat** = `utbytte_fra_datterselskap + gevinst_ved_realisasjon_av_aksjer − tap_ved_realisasjon_av_aksjer − andre_driftskostnader − skattekostnad`
 5. **Utbytte for året.** Dette er en beslutning, ikke en transaksjon, så den kommer ikke fra bankeksporten. Spør brukeren om styret foreslår utbytte for dette regnskapsåret. Blir svaret ja:
    - `avsatt_utbytte_i_aar` = beløpet. Det avsettes som kortsiktig gjeld per 31.12 og reduserer egenkapitalen i **dette** året, ikke i året det utbetales (rskl. § 6-2, aksjeloven § 8-2 første ledd).
@@ -146,6 +147,7 @@ Skriv en lesbar markdown-fil med disse seksjonene (ikke skriv fødselsnummer i d
 ## Skattemessig
 | Post | <år> |
 |---|--:|
+| Fremførbart underskudd 01.01 (fjorårets «Underskudd til fremføring neste år», eller fjorårets skattemelding) | <x> |
 | Mottatt utbytte | <x> |
 | Skattepliktig del av utbyttet (3 %-sjablon, 0 ved eierandel over 90 %) | <x> |
 | Gevinst (+) / tap (−) ved realisasjon av aksjer, holdt utenfor (fritaksmetoden) | <x> |
@@ -155,7 +157,7 @@ Skriv en lesbar markdown-fil med disse seksjonene (ikke skriv fødselsnummer i d
 | Beregnet skatt (22 %) | <x> |
 | **Underskudd til fremføring neste år** | <x> |
 
-Denne seksjonen er input til neste års bokføring og til `underskudd_til_fremfoering` i `wenche-config`. Uten den må tallet hentes manuelt fra RF-1028 hvert år.
+«Fremførbart underskudd 01.01» er input til `underskudd_til_fremfoering` i `wenche-config`. «Underskudd til fremføring neste år» er saldoen 31.12 og blir neste års 01.01-tall. Uten seksjonen må tallet hentes manuelt fra fjorårets skattemelding hvert år.
 
 ## Utbytte
 | Post | <år> |

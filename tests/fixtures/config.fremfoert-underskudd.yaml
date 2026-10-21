@@ -1,0 +1,123 @@
+# Fixture for et år etter et underskuddsår.
+#
+# Fjoråret (2024) hadde 2 896 i kostnader og ingen inntekter, så selskapet gikk inn i
+# 2025 med 2 896 i fremførbart underskudd. I 2025 er kostnadene 125, fortsatt uten
+# inntekter.
+#
+# underskudd_til_fremfoering er saldoen ved årets START (2 896), altså «Fremførbart
+# underskudd 01.01» i regnskap.md. Wenche legger selv til årets underskudd og skal
+# beregne 2 896 + 125 = 3 021 i underskudd til fremføring, lik «Underskudd til
+# fremføring neste år» i regnskap.md. Står saldoen 31.12 (3 021) her i stedet, teller
+# Wenche årets underskudd to ganger og melder 3 146.
+#
+# KUN syntetiske data. Aldri ekte fødselsnummer her (fila versjoneres).
+
+selskap:
+  navn: "Eksempel Holding AS"
+  org_nummer: "123456789"
+  daglig_leder: "Kari Nordmann"
+  styreleder: "Kari Nordmann"
+  forretningsadresse: "Eksempelgata 1, 0001 Oslo"
+  stiftelsesaar: 2022
+  stiftelsesdato: "2022-03-14"
+  aksjekapital: 30000
+  kontakt_epost: "kari@example.no"
+
+regnskapsaar: 2025
+
+resultatregnskap:
+  driftsinntekter:
+    salgsinntekter: 0
+    andre_driftsinntekter: 0
+  driftskostnader:
+    loennskostnader: 0
+    avskrivninger: 0
+    andre_driftskostnader: 125
+  finansposter:
+    utbytte_fra_datterselskap: 0
+    andre_finansinntekter: 0
+    rentekostnader: 0
+    andre_finanskostnader: 0
+    gevinst_ved_realisasjon_av_aksjer: 0
+    tap_ved_realisasjon_av_aksjer: 0
+  skattekostnad: 0
+
+balanse:
+  eiendeler:
+    anleggsmidler:
+      aksjer_i_datterselskap: 0
+      andre_aksjer: 50000
+      langsiktige_fordringer: 0
+    omloepmidler:
+      kortsiktige_fordringer: 0
+      bankinnskudd: 26979
+  egenkapital_og_gjeld:
+    egenkapital:
+      aksjekapital: 30000
+      overkursfond: 0
+      annen_egenkapital: -3021
+    langsiktig_gjeld:
+      laan_fra_aksjonaer: 50000
+      andre_langsiktige_laan: 0
+    kortsiktig_gjeld:
+      leverandoergjeld: 0
+      betalbar_skatt: 0
+      skyldige_offentlige_avgifter: 0
+      avsatt_utbytte: 0
+      annen_kortsiktig_gjeld: 0
+
+foregaaende_aar:
+  resultatregnskap:
+    driftsinntekter:
+      salgsinntekter: 0
+      andre_driftsinntekter: 0
+    driftskostnader:
+      loennskostnader: 0
+      avskrivninger: 0
+      andre_driftskostnader: 2896
+    finansposter:
+      utbytte_fra_datterselskap: 0
+      andre_finansinntekter: 0
+      rentekostnader: 0
+      andre_finanskostnader: 0
+      gevinst_ved_realisasjon_av_aksjer: 0
+      tap_ved_realisasjon_av_aksjer: 0
+    skattekostnad: 0
+  balanse:
+    eiendeler:
+      anleggsmidler:
+        aksjer_i_datterselskap: 0
+        andre_aksjer: 50000
+        langsiktige_fordringer: 0
+      omloepmidler:
+        kortsiktige_fordringer: 0
+        bankinnskudd: 27104
+    egenkapital_og_gjeld:
+      egenkapital:
+        aksjekapital: 30000
+        overkursfond: 0
+        annen_egenkapital: -2896
+      langsiktig_gjeld:
+        laan_fra_aksjonaer: 50000
+        andre_langsiktige_laan: 0
+      kortsiktig_gjeld:
+        leverandoergjeld: 0
+        betalbar_skatt: 0
+        skyldige_offentlige_avgifter: 0
+        avsatt_utbytte: 0
+        annen_kortsiktig_gjeld: 0
+
+skattemelding:
+  underskudd_til_fremfoering: 2896
+  anvend_fritaksmetoden: true
+  eierandel_for_fritaksmetoden: 25
+  boersnotert: false
+  formuesverdi_aksjer: 0
+
+aksjonaerer:
+  - navn: "Kari Nordmann"
+    fodselsnummer: "01010112345"
+    antall_aksjer: 1000
+    aksjeklasse: "ordinære"
+    utbytte_utbetalt: 0
+    innbetalt_kapital_per_aksje: 30
