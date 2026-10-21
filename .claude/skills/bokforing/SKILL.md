@@ -23,8 +23,8 @@ Fører ett regnskapsår for et passivt holdingselskap fra en bankeksport. Du pro
 | Penger ut til eier, bekreftet som nedbetaling, opp til utestående lån fra aksjonær | Reduserer lån fra aksjonær (gjeld). Rører verken resultat eller egenkapital |
 | Penger ut til eier utover utestående avsatt utbytte | **Flagg og spør.** Se «Utbetaling uten avsetning» under |
 | Renteinntekt fra banken (kreditrenter) | Andre finansinntekter. Fullt skattepliktig, verken fritaksmetode eller sjablon |
-| Renter belastet av banken (debetrenter, renter på lån i banken) | Rentekostnader |
-| Renter betalt til eier (f.eks. på aksjonærlån) eller til Skatteetaten (rentetillegg, forsinkelsesrenter) | **Flagg og spør.** Det første forutsetter en låneavtale, det andre kan blandes med skattebetalingen og har egne fradragsregler |
+| Renter belastet av banken på kontoen (debetrenter) | Rentekostnader |
+| Renter på lån i banken, renter betalt til eier (f.eks. på aksjonærlån) eller til Skatteetaten (rentetillegg, forsinkelsesrenter) | **Flagg og spør.** Et lån i banken er utenfor den låste modellen, renter til eier forutsetter en låneavtale, og renter til Skatteetaten kan blandes med skattebetalingen og har egne fradragsregler |
 | Alle andre utbetalinger | Andre driftskostnader |
 | Kjøp av eierpost | Aksjer i datterselskap eller andre aksjer (finansielt anleggsmiddel) til kostpris. Se «Datterselskap eller andre aksjer» under |
 | Salg av eierpost | Kostprisen ut av balansen, differansen mot salgssummen er gevinst eller tap ved realisasjon av aksjer. Se «Salg av eierpost» under |
@@ -197,7 +197,7 @@ Denne seksjonen er input til neste års bokføring, til `protokoll` og til `avsa
 
 ## Merknader
 - Balansekontroll: sum eiendeler = sum EK og gjeld (✓/avvik)
-- Eventuelle flagg (salg av eierpost, utbytte uten dekning, utbetaling til eier uten avsetning, utbytte eller nedbetaling av lån, mulig kapitalforhøyelse, renter til eier eller Skatteetaten, uklare transaksjoner, store poster)
+- Eventuelle flagg (salg av eierpost, utbytte uten dekning, utbetaling til eier uten avsetning, utbytte eller nedbetaling av lån, mulig kapitalforhøyelse, renter til eier, Skatteetaten eller på lån i banken, uklare transaksjoner, store poster)
 ```
 
 Feltnavnene i tabellene er bevisst de samme som Wenche bruker, slik at `wenche-config`-skillen kan mappe dem nær mekanisk.

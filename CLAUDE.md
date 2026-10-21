@@ -17,8 +17,8 @@ Kun passive holdingselskaper: selskaper som eier aksjer i andre selskaper og ell
 | Penger ut til eier utover det | Flagg og spør: nedbetaling av lån fra aksjonær, utbytte vedtatt i året, lån til aksjonær, eller tilbakebetaling av kapital |
 | Utbytte for regnskapsåret (styrets forslag, ikke en banktransaksjon) | Avsatt utbytte (kortsiktig gjeld), reduserer egenkapital i avsetningsåret |
 | Renteinntekt fra banken | Andre finansinntekter (fullt skattepliktig, ingen fritaksmetode) |
-| Renter belastet av banken | Rentekostnader |
-| Renter betalt til eier eller Skatteetaten | Flagg og spør |
+| Renter belastet av banken på kontoen (debetrenter) | Rentekostnader |
+| Renter på lån i banken, til eier eller til Skatteetaten | Flagg og spør. Et lån i banken er utenfor modellen |
 | Alle andre utbetalinger | Driftskostnad |
 | Kjøp av eierpost | Finansielle anleggsmidler til kostpris (fra `selskap.yaml`): aksjer i datterselskap ved kontroll (> 50 % av stemmene, rskl. § 1-3), ellers andre aksjer |
 | Salg av eierpost | Kostprisen ut av balansen, differansen mot salgssummen er gevinst/tap ved realisasjon av aksjer (finanspost, skattefri/ikke fradrag etter fritaksmetoden) |

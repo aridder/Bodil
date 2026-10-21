@@ -12,8 +12,8 @@ Bodil fører etter en bevisst minimal, låst bokføringsmodell. Den dekker det e
 | Penger ut til eier, bekreftet som nedbetaling, opp til utestående lån fra aksjonær | Reduserer lån fra aksjonær (gjeld), ikke egenkapital |
 | Penger ut til eier utover det | Flagges: nedbetaling av lån fra aksjonær, utbytte vedtatt i året, lån til aksjonær, eller tilbakebetaling av kapital |
 | Renteinntekt fra banken | Andre finansinntekter (fullt skattepliktig) |
-| Renter belastet av banken | Rentekostnader |
-| Renter betalt til eier eller Skatteetaten | Flagges: hvilket lån, og om renten er fradragsberettiget |
+| Renter belastet av banken på kontoen (debetrenter) | Rentekostnader |
+| Renter på lån i banken, til eier eller til Skatteetaten | Flagges: et lån i banken er utenfor modellen; ellers hvilket lån, og om renten er fradragsberettiget |
 | Alle andre utbetalinger | Driftskostnad (typisk bankgebyrer) |
 | Kjøp av eierpost | Finansielle anleggsmidler til kostpris (fra `selskap.yaml`): aksjer i datterselskap eller andre aksjer |
 | Salg av eierpost | Kostprisen ut av balansen, differansen mot salgssummen er gevinst eller tap ved realisasjon av aksjer |
