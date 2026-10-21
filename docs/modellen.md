@@ -38,7 +38,7 @@ Et hvilende år har ingen skattepliktig inntekt, og skattekostnaden er 0. Mottar
 
 Skatten fastsettes og betales året etter, så den står som **betalbar skatt** i balansen per 31.12. Betalingen året etter reduserer den gjelden og er ikke en ny kostnad. Ved eierandel på 90 % eller mer er utbyttet fullt skattefritt, og skattekostnaden blir 0.
 
-Selges en eierpost, er gevinsten skattefri og tapet ikke fradragsberettiget under fritaksmetoden, og 3 %-sjablonen gjelder ikke gevinst. Gevinst og tap står derfor i resultatet, men holdes utenfor skatteberegningen. Er det solgte selskapet utenlandsk, flagger Bodil det. Wenche har ennå ikke egne felt for gevinst og tap ved realisasjon av aksjer, så `wenche-config` stopper og ber deg håndtere skatteberegningen i Wenche manuelt. Brukeren må selv fjerne eller redusere eierposten i `selskap.yaml`.
+Selges en eierpost, er gevinsten skattefri og tapet ikke fradragsberettiget under fritaksmetoden, og 3 %-sjablonen gjelder ikke gevinst. Gevinst og tap står derfor i resultatet, men holdes utenfor skatteberegningen. Er det solgte selskapet utenlandsk, flagger Bodil det. `wenche-config` fører beløpene til Wenches egne felt for gevinst og tap ved realisasjon av aksjer, og Wenche holder dem utenfor skatteberegningen på samme måte. Brukeren må selv fjerne eller redusere eierposten i `selskap.yaml`.
 
 ## Flagg, ikke gjett
 

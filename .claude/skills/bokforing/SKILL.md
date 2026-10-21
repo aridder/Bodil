@@ -54,8 +54,8 @@ Dette er den vanligste situasjonen det året et selskap går over fra utbetaling
 
 Eierposten står til kostpris. Ved salg fjernes kostprisen fra balansen (`andre_aksjer`, eller `aksjer_i_datterselskap` hvis posten står der), og salgssummen kommer inn på bankkontoen. Differansen er et regnskapsmessig resultat:
 
-- `gevinst_realisasjon_aksjer` = salgssum − kostpris, når positiv
-- `tap_realisasjon_aksjer` = kostpris − salgssum, når positiv
+- `gevinst_ved_realisasjon_av_aksjer` = salgssum − kostpris, når positiv
+- `tap_ved_realisasjon_av_aksjer` = kostpris − salgssum, når positiv
 
 Uten denne linjen går ikke balansen opp når salgssummen avviker fra kostprisen.
 
@@ -77,7 +77,7 @@ Uten denne linjen går ikke balansen opp når salgssummen avviker fra kostprisen
    - Er `skattepliktig_inntekt` positiv, trekk fra fremført underskudd. Tallet står under «Skattemessig» i `<år-1>/regnskap.md`. Finnes ikke fjorårets fil (år 1, eller år ført utenfor Bodil), **spør brukeren** om underskudd til fremføring fra fjorårets RF-1028 i stedet for å anta 0.
    - `skattekostnad` = 22 % av det som står igjen, rundet opp. Er `skattepliktig_inntekt` 0 eller negativ etter fradrag, er skattekostnaden 0.
    - `underskudd_til_fremfoering` for neste år: er `skattepliktig_inntekt` negativ, øk fjorårets fremførte underskudd med hele det negative beløpet. Er den positiv, reduser fjorårets med det som faktisk ble brukt som fradrag.
-4. **Årsresultat** = `utbytte_fra_datterselskap + gevinst_realisasjon_aksjer − tap_realisasjon_aksjer − andre_driftskostnader − skattekostnad`
+4. **Årsresultat** = `utbytte_fra_datterselskap + gevinst_ved_realisasjon_av_aksjer − tap_ved_realisasjon_av_aksjer − andre_driftskostnader − skattekostnad`
 5. **Utbytte for året.** Dette er en beslutning, ikke en transaksjon, så den kommer ikke fra bankeksporten. Spør brukeren om styret foreslår utbytte for dette regnskapsåret. Blir svaret ja:
    - `avsatt_utbytte_i_aar` = beløpet. Det avsettes som kortsiktig gjeld per 31.12 og reduserer egenkapitalen i **dette** året, ikke i året det utbetales (rskl. § 6-2, aksjeloven § 8-2 første ledd).
    - **Krev dekning.** `overkursfond + annen_egenkapital` etter avsetningen må være ≥ 0 (aksjeloven § 8-1). En avsetning er en utdeling og kan gjøre fri egenkapital negativ helt alene. Er den negativ, stopp og be brukeren redusere beløpet.
@@ -178,7 +178,7 @@ Denne seksjonen er input til neste års bokføring, til `protokoll` og til `avsa
 - Eventuelle flagg (salg av eierpost, utbytte uten dekning, utbetaling til eier uten avsetning, utbytte eller nedbetaling av lån, mulig kapitalforhøyelse, uklare transaksjoner, store poster)
 ```
 
-Feltnavnene i tabellene er bevisst de samme som Wenche bruker, slik at `wenche-config`-skillen kan mappe dem nær mekanisk. Unntaket er gevinst og tap ved realisasjon av aksjer: Wenche har ennå ikke egne felt for dem, så de står på egne linjer og håndteres særskilt i `wenche-config`.
+Feltnavnene i tabellene er bevisst de samme som Wenche bruker, slik at `wenche-config`-skillen kan mappe dem nær mekanisk.
 
 ## Neste steg
 
