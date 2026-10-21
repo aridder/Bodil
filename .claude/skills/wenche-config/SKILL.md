@@ -90,7 +90,8 @@ balanse:
                                        # i utbetalingsåret. 0 hvis ingenting er avsatt
       annen_kortsiktig_gjeld: 0
 
-foregaaende_aar:                       # fjorårets tall fra regnskap.md (sammenligningstall, rskl. § 6-6)
+foregaaende_aar:                       # fjorårets tall fra sammenligningskolonnen i regnskap.md, med eventuell
+                                       # omklassifisering av eierposter (sammenligningstall, rskl. § 6-6)
   resultatregnskap: { ... }            # samme struktur som over
   balanse: { ... }                     # utelat hele seksjonen hvis selskapet ble stiftet i år
 

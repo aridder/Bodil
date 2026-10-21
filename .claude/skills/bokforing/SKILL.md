@@ -11,7 +11,7 @@ Fører ett regnskapsår for et passivt holdingselskap fra en bankeksport. Du pro
 
 - `selskap.yaml` (stamdata, åpningsbalanse, eierposter). Finnes bare `selskap.example.yaml`, be brukeren kopiere den til `selskap.yaml` først.
 - `<år>/bankeksport.csv` med kolonnene `dato,beskrivelse,belop` (positivt = inn, negativt = ut). En ekstra kolonne `folio_id` (fra `folio_import.py --med-id`) er kjent: la den stå i fila og ignorer den. Ser eksporten ellers annerledes ut, spør hvilke kolonner som er dato/beskrivelse/beløp i stedet for å gjette.
-- Forrige års `<år-1>/regnskap.md` hvis det finnes. Da brukes fjorårets utgående balanse som åpningsbalanse (overstyrer `aapningsbalanse` i `selskap.yaml`), og fjorårets tall fylles inn som sammenligningstall.
+- Forrige års `<år-1>/regnskap.md` hvis det finnes. Da brukes fjorårets utgående balanse som åpningsbalanse (overstyrer `aapningsbalanse` i `selskap.yaml`), og fjorårets tall fylles inn som sammenligningstall. Står en eierpost på en annen balanselinje i fjorårets fil enn den skal stå på i år, se «Overgang» under «Datterselskap eller andre aksjer».
 
 ## Den låste modellen (gjelder hver transaksjon)
 
@@ -59,6 +59,8 @@ Hver eierpost i `selskap.yaml` står på én av to balanselinjer, og skillet er 
 - **Flagg og spør** når kontroll ikke kan avgjøres: eierandel på nøyaktig 50 %, manglende `eierandel_prosent`, eller flere aksjeklasser med ulik stemmerett. Spør om selskapet har flertallet av stemmene eller rett til å velge flertallet av styret, og be brukeren sette `datterselskap` på eierposten.
 
 Linjen styrer mer enn plasseringen: Wenche oppgir selskapet som morselskap i årsregnskapet når `aksjer_i_datterselskap` er over 0. Et heleid datterselskap under `andre_aksjer` rapporterer derfor holdingselskapet som «ikke morselskap».
+
+**Overgang fra Bodil 1.0.0 og eldre:** da sto alle eierposter under `andre_aksjer`. Er en eierpost datterselskap etter reglene over, og står den under «Andre aksjer» i fjorårets `regnskap.md`, skal du omklassifisere fjorårets beløp til «Aksjer i datterselskap» i sammenligningskolonnen. Da er linjene sammenlignbare (rskl. § 6-6). Summen eiendeler endres ikke. Skriv omklassifiseringen under Merknader, og ikke endre fjorårets `regnskap.md`.
 
 ### Salg av eierpost
 
