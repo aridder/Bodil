@@ -95,7 +95,7 @@ foregaaende_aar:                       # fjorårets tall fra regnskap.md (sammen
 skattemelding:
   underskudd_til_fremfoering: <fra «Skattemessig» i regnskap.md, ellers fjorårets RF-1028>
   anvend_fritaksmetoden: true          # holdingselskap som eier aksjer
-  eierandel_for_fritaksmetoden: <prosent>   # ≥ 90 % gir fullt skattefritt utbytte; < 90 % gir 3 % sjablonbeskatning
+  eierandel_for_fritaksmetoden: <prosent>   # over 90 % gir fullt skattefritt utbytte; 90 % eller lavere gir 3 % sjablonbeskatning
   boersnotert: false
   formuesverdi_aksjer: <RF-1088S post 209, MÅ fylles inn manuelt>
 

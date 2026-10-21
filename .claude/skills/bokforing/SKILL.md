@@ -72,7 +72,7 @@ Uten denne linjen går ikke balansen opp når salgssummen avviker fra kostprisen
    - `utbytte_utbetalt` = sum utbetalt til eier som utbytte, ikke nedbetaling av lån fra aksjonær. Dette tallet er **bare** en kontantstrøm og en post i aksjonærregisteroppgaven; det reduserer ikke egenkapitalen med mindre steget over konkluderte med utbytte vedtatt i året
    - endring i `laan_fra_aksjonaer` = sum innskudd fra eier − sum nedbetalt lån til eier
 3. **Skattekostnad.** Et år uten utbytte gir 0, men et år med mottatt utbytte har normalt en liten reell skattekostnad, og regnskapsloven § 6-1 krever den som egen linje før årsresultatet. Regn i denne rekkefølgen:
-   - `skattepliktig_utbytte` = 0 hvis eierandelen er 90 % eller mer, ellers 3 % av mottatt utbytte rundet opp til nærmeste krone (fritaksmetoden, sktl. § 2-38 sjette ledd). Eierandelen står under `eierposter` i `selskap.yaml`. Har selskapet flere eierposter med ulik eierandel, flagg det og spør hvilken posten utbyttet kom fra i stedet for å velge selv.
+   - `skattepliktig_utbytte` = 0 hvis eierandelen er mer enn 90 %, ellers 3 % av mottatt utbytte rundet opp til nærmeste krone (fritaksmetoden, sktl. § 2-38 sjette ledd). Unntaket fra sjablonen gjelder konsern etter sktl. § 10-4, som krever *mer enn* 90 % av aksjene og stemmene, så nøyaktig 90 % gir 3 %. Eierandelen står under `eierposter` i `selskap.yaml`. Har selskapet flere eierposter med ulik eierandel, flagg det og spør hvilken posten utbyttet kom fra i stedet for å velge selv.
    - `skattepliktig_inntekt` = `skattepliktig_utbytte − andre_driftskostnader`. Gevinst og tap ved realisasjon av aksjer holdes utenfor: under fritaksmetoden er gevinsten skattefri og tapet ikke fradragsberettiget (sktl. § 2-38), og 3 %-sjablonen gjelder bare utbytte, ikke gevinst. Dette gjelder aksjer i norske aksjeselskaper. Er det solgte selskapet utenlandsk, **flagg og spør**: fritaksmetoden har egne vilkår for selskaper utenfor EØS og i lavskatteland (sktl. § 2-38), og Bodil avgjør ikke det.
    - Er `skattepliktig_inntekt` positiv, trekk fra fremført underskudd. Tallet står under «Skattemessig» i `<år-1>/regnskap.md`. Finnes ikke fjorårets fil (år 1, eller år ført utenfor Bodil), **spør brukeren** om underskudd til fremføring fra fjorårets RF-1028 i stedet for å anta 0.
    - `skattekostnad` = 22 % av det som står igjen, rundet opp. Er `skattepliktig_inntekt` 0 eller negativ etter fradrag, er skattekostnaden 0.
@@ -147,7 +147,7 @@ Skriv en lesbar markdown-fil med disse seksjonene (ikke skriv fødselsnummer i d
 | Post | <år> |
 |---|--:|
 | Mottatt utbytte | <x> |
-| Skattepliktig del av utbyttet (3 %-sjablon, 0 ved eierandel ≥ 90 %) | <x> |
+| Skattepliktig del av utbyttet (3 %-sjablon, 0 ved eierandel over 90 %) | <x> |
 | Gevinst (+) / tap (−) ved realisasjon av aksjer, holdt utenfor (fritaksmetoden) | <x> |
 | Skattepliktig inntekt før fradrag | <x> |
 | Anvendt fremført underskudd | <x> |
